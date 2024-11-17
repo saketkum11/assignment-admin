@@ -2,6 +2,33 @@
 
 - A backend application that facilitates assignment handling between users and admins. Users can submit assignments, while admins have the authority to accept or reject them.
 
+
+Feature 
+ 
+ - register 
+ - login
+ - logout
+ - get Admin
+ - upload Assignment
+ - get Assignment
+ - accept Assignment
+ - reject Assignment
+
+#### Deployment 
+ - app is deployed to Render
+
+#### For Local host
+
+  we need to below env variable:
+
+    PORT= XXXX
+    DATABASE_URL= XXXXXXXX
+    CROSS_ORIGIN=*
+    ACCESS_TOKEN_SECRET= XXXXXX
+    ACCESS_TOKEN_EXPIRY= 1D or 7d
+
+ 
+
 #### ENDPOINT
 
 base url - /api/v1/user
