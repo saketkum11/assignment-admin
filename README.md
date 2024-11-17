@@ -14,8 +14,14 @@ Feature
  - accept Assignment
  - reject Assignment
 
+## Tech Stack
+ - Express js
+### DATA Base
+-  MongoDB
+
+
 #### Deployment 
- - app is deployed to Render
+ - App is deployed to Render.
 
 #### For Local host
 
