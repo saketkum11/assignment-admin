@@ -15,6 +15,8 @@ base url - /api/v1/user
 
   role:"user"
 
+ method - POST
+
  request body-
  {
    name: "Saket Kumar",
@@ -36,6 +38,8 @@ base url - /api/v1/user
 ```javascript
 Login
 
+method - POST
+
 request body-
 {
   email: "kumarsaket601",
@@ -52,7 +56,10 @@ response body - {
 `/logout`
 
 ```javascript
-  Logout
+
+ Logout
+
+ method - POST
 
   response body - {
     status code - 200
@@ -68,6 +75,7 @@ response body - {
   upload assignment
 
 
+  method - POST
 
   request body - {
 
@@ -93,14 +101,15 @@ response body - {
 
  fetch all Admin  list
 
+ method - GET
 
  response body - {
    status code - 200
-   data: {
+   data:[ {
         _id: 7,
         name:"Saket kumar",
         email:"kumarsaket601@gmail.com"
-   }
+   }],
    message :"Admin data fetch successfully"
 
  }
@@ -112,8 +121,9 @@ response body - {
 
 ```javascript
 
- fetch all Admin  list
+ fetch all assignments  list
 
+ method - GET
 
  response body - {
    status code - 200
@@ -132,9 +142,11 @@ response body - {
 
 ```javascript
 
- fetch all Admin  list
+ Accept assignments
 
  request params - id
+
+  method - POST
 
  response body - {
     status code - 200,
@@ -147,9 +159,11 @@ response body - {
 
 ```javascript
 
- fetch all Admin  list
+ Reject assignment
 
  request params - id
+
+ method - POST
 
  response body - {
     status code - 200,
