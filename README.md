@@ -141,13 +141,13 @@ response body - {
  method - GET
 
  response body - {
-   status code - 200
    data:[ {
-        _id: 7,
+     _id: 7,
         name:"Saket kumar",
         email:"kumarsaket601@gmail.com"
    }],
-   message :"Admin data fetch successfully"
+   message :"Admin data fetch successfully",
+  status 200
 
  }
 ```
@@ -163,19 +163,18 @@ response body - {
  method - GET
 
  response body - {
-   status- 200
    data:[ {
-        "data": [
-        {
-            "_id": "6739f93a0e670a7139a3eff6",
+     "data": [
+       {
+         "_id": "6739f93a0e670a7139a3eff6",
             "userId": {
-                "_id": "6739d2260abf77645809db44",
+              "_id": "6739d2260abf77645809db44",
                 "name": "nagin kumar",
                 "email": "nagin@gmail.com"
             },
             "task": "web app for dom",
             "admin": {
-                "_id": "6739d1e71842dd6a716afbf4",
+              "_id": "6739d1e71842dd6a716afbf4",
                 "name": "Ak kumar",
                 "email": "ak@gmail.com"
             },
@@ -183,6 +182,7 @@ response body - {
    }],
      status: "pending",
    message: "Assignment data fetch successfully",
+    status- 200
  }]
  }
 ```
