@@ -35,18 +35,11 @@ const register = async (req, res) => {
     if (alreadyUser) {
       return res.status(409).json({ message: "user is already register " });
     }
-    console.log(
-      "from register controller36",
-      email,
-      name,
-      password,
-      role,
-      req.body
-    );
+ 
     // new user create
 
     const user = await User.create(req.body);
-    return res.status(200).json({ message: "User Have registerd succefully" });
+    return res.status(200).json({ message: "User has successfully registered " });
   } catch (error) {
     return res.status(500).json(error);
   }
