@@ -1,14 +1,55 @@
 import { ApiErrorHandler } from "../utils/ApiErrorHandler.js";
 import { ApiResponseHandler } from "../utils/ApiResponseHandler.js";
 import { Assignment } from "../models/assigment.model.js";
-import jwt from "jsonwebtoken";
 import z from "zod";
-import { User } from "../models/user.model.js";
+import mongoose from "mongoose";
 const validateInputString = z.string();
 // get assignment
 const getAssigment = async (req, res) => {
   try {
-    const assignment = await Assignment.find();
+    const assignment = await Assignment.aggregate([
+      {
+        $match: {
+          admin: new mongoose.Types.ObjectId(req.user._id),
+        },
+      },
+      {
+        $lookup: {
+          localField: "userId",
+          foreignField: "_id",
+          from: "users",
+          as: "userId",
+          pipeline: [
+            {
+              $project: {
+                _id: 1,
+                name: 1,
+                email: 1,
+              },
+            },
+          ],
+        },
+      },
+      {
+        $lookup: {
+          localField: "admin",
+          foreignField: "_id",
+          from: "users",
+          as: "admin",
+          pipeline: [
+            {
+              $project: {
+                _id: 1,
+                name: 1,
+                email: 1,
+              },
+            },
+          ],
+        },
+      },
+      { $unwind: "$userId" },
+      { $unwind: "$admin" },
+    ]);
     return res
       .status(200)
       .json(
@@ -81,7 +122,7 @@ const rejectAssignment = async (req, res) => {
     if (findAssignment.status === "reject") {
       return res
         .status(406)
-        .json(ApiErrorHandler("assignment  is already  by admin", 406));
+        .json(ApiErrorHandler("assignment  is already  rejected by admin", 406));
     }
     const assignment = await Assignment.findByIdAndUpdate(
       id,

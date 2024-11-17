@@ -165,17 +165,25 @@ response body - {
  response body - {
    status- 200
    data:[ {
+        "data": [
         {
-            _id: "6738d8583bbfe85ca0bde82b",
-            userId: "673896a1d4cdfac355dfd970",
-            task: "make a app on web chat app",
-            admin: "673896a1d4cdfac355dfd970",
-            status: "reject",
+            "_id": "6739f93a0e670a7139a3eff6",
+            "userId": {
+                "_id": "6739d2260abf77645809db44",
+                "name": "nagin kumar",
+                "email": "nagin@gmail.com"
+            },
+            "task": "web app for dom",
+            "admin": {
+                "_id": "6739d1e71842dd6a716afbf4",
+                "name": "Ak kumar",
+                "email": "ak@gmail.com"
+            },
 
-        },
    }],
+     status: "pending",
    message: "Assignment data fetch successfully",
-
+ }]
  }
 ```
 
@@ -190,8 +198,15 @@ response body - {
   method - POST
 
  response body - {
-    status code - 200,
-    message: "Assignment  is accepted by Admin"
+     "data": {
+        "_id": "6739f93a0e670a7139a3eff6",
+        "userId": "6739d2260abf77645809db44",
+        "task": "web app for dom",
+        "admin": "6739d1e71842dd6a716afbf4",
+        "status": "accept",
+    }, 
+    message: "Assignment  is accepted by Admin ",
+    status: 200
  }
 
 ```
@@ -207,8 +222,15 @@ response body - {
  method - POST
 
  response body - {
-    status code - 200,
-    message: "Assignment  is rejectd by Admin"
+    "data": {
+        "_id": "6739f93a0e670a7139a3eff6",
+        "userId": "6739d2260abf77645809db44",
+        "task": "web app for dom",
+        "admin": "6739d1e71842dd6a716afbf4",
+        "status": "reject",
+    },
+    "message": "Assignment is rejected by Admin ",
+    "status": 200
  }
 
 ```
