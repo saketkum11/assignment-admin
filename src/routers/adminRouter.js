@@ -4,15 +4,14 @@ import {
   getAssigment,
   rejectAssignment,
 } from "../controllers/admin.controller.js";
-import { verifyAuth } from "../middleware/auth.middleware.js";
+import { adminMiddleWare } from "../middleware/admin.middleware.js";
 
 const router = Router();
 const app = express();
 
-// middlerware  used to give the access of other routes 
+// middlerware  used to give the access of other routes
 
-app.use(verifyAuth);
-router.route("/assignments").get(getAssigment);
-router.route("/assignments/:id/accept").post(acceptAssignment);
-router.route("/assignments/:id/reject").post(rejectAssignment);
+router.route("/assignments").get(adminMiddleWare, getAssigment);
+router.route("/assignments/:id/accept").post(adminMiddleWare, acceptAssignment);
+router.route("/assignments/:id/reject").post(adminMiddleWare, rejectAssignment);
 export default router;

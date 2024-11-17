@@ -1,6 +1,7 @@
+import { ApiErrorHandler } from "../utils/ApiErrorHandler.js";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user.model.js";
-const verifyAuth = async (req, res, next) => {
+const userMiddleWare = async (req, res, next) => {
   try {
     // access token from cookies
     const accessToken =
@@ -9,7 +10,7 @@ const verifyAuth = async (req, res, next) => {
 
     // check token false
     if (!accessToken) {
-      return res.status(409).json({ message: "Please login first" });
+      return res.status(409).json(ApiErrorHandler("Please login first",409));
     }
     // if token true decode the token
     const decodeToken = jwt.verify(
@@ -20,7 +21,13 @@ const verifyAuth = async (req, res, next) => {
     const user = await User.findById(decodeToken._id).select("-password");
     // store the user id in to the request
     if (!user) {
-      return res.status(404).json({ status: 404, messsage: "token is wrong" });
+      return res.status(409).json(ApiErrorHandler("token is wrong",409));
+    }
+
+    if (user.role === "admin") {
+      return res
+        .status(406)
+        .json(ApiErrorHandler("Only user allowed to access modified"));
     }
     req.user = user;
     next();
@@ -28,4 +35,4 @@ const verifyAuth = async (req, res, next) => {
     return res.status(500).json(error);
   }
 };
-export { verifyAuth };
+export { userMiddleWare };

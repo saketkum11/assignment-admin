@@ -2,38 +2,38 @@
 
 - A backend application that facilitates assignment handling between users and admins. Users can submit assignments, while admins have the authority to accept or reject them.
 
+Feature
 
-Feature 
- 
- - register 
- - login
- - logout
- - get Admin
- - upload Assignment
- - get Assignment
- - accept Assignment
- - reject Assignment
+- register
+- login
+- logout
+- get Admin
+- upload Assignment
+- get Assignment
+- accept Assignment
+- reject Assignment
 
 ## Tech Stack
- - Express js
+
+- Express js
+
 ### DATA Base
--  MongoDB
 
+- MongoDB
 
-#### Deployment 
- - App is deployed to Render.
+#### Deployment
+
+- App is deployed to Render.
 
 #### For Local host
 
-  we need to below env variable:
+we need to below env variable:
 
     PORT= XXXX
     DATABASE_URL= XXXXXXXX
     CROSS_ORIGIN=*
     ACCESS_TOKEN_SECRET= XXXXXX
     ACCESS_TOKEN_EXPIRY= 1D or 7d
-
- 
 
 #### ENDPOINT
 
@@ -80,9 +80,9 @@ request body-
 }
 
 response body - {
-  status code - 200
-  message :"Successfully Logged IN"
-
+    data: {},
+    message: "Successfully Logged IN",
+    status: 200
 }
 ```
 
@@ -95,8 +95,9 @@ response body - {
  method - POST
 
   response body - {
-    status code - 200
-    message :"SuccessFully Logged out"
+    data: null,
+    message: "SuccessFully Logged out",
+    status: 200
 
   }
 ```
@@ -117,13 +118,16 @@ response body - {
   }
 
   response body - {
-    status code - 200
-    data: {
-        userId: 9,
-        task:"a web app for chat to friend",
-        admin: 5
-    }
-    message :"Successfully Created assignment"
+     "data": {
+        userId: "673896a1d4cdfac355dfd970",
+        task: "web app for dom",
+        admin: "6739d1ba2764ad9894dd5d50",
+        status: "pending",
+        _id: "6739e8fe6b0a4359bb29ef2a",
+
+    },
+    "message": "Successfully Created assignment",
+    "status": 200
 
   }
 ```
@@ -159,12 +163,16 @@ response body - {
  method - GET
 
  response body - {
-   status code - 200
+   status- 200
    data:[ {
-        _id: 7,
-        userId: 6,
-        task : "a web app for  chat with friend"
-        adminId: 9
+        {
+            _id: "6738d8583bbfe85ca0bde82b",
+            userId: "673896a1d4cdfac355dfd970",
+            task: "make a app on web chat app",
+            admin: "673896a1d4cdfac355dfd970",
+            status: "reject",
+
+        },
    }],
    message: "Assignment data fetch successfully",
 

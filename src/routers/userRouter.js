@@ -1,6 +1,12 @@
 import { Router } from "express";
-import { getAdmin, login, logout, register, uploadAssignment } from "../controllers/auth.controller.js";
-import { verifyAuth } from "../middleware/auth.middleware.js";
+import {
+  getAdmin,
+  login,
+  logout,
+  register,
+  uploadAssignment,
+} from "../controllers/auth.controller.js";
+import { userMiddleWare } from "../middleware/user.middleware.js";
 
 const router = Router();
 
@@ -11,7 +17,7 @@ const router = Router();
 router.route("/register").post(register);
 router.route("/login").post(login);
 router.route("/logout").post(logout);
-router.route("/upload").post(verifyAuth, uploadAssignment);
-router.route("/admins").get(verifyAuth, getAdmin);
+router.route("/upload").post(userMiddleWare,  uploadAssignment);
+router.route("/admins").get(userMiddleWare,  getAdmin);
 
 export default router;
