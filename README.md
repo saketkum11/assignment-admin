@@ -37,7 +37,7 @@ Feature
 
 #### ENDPOINT
 
-base url - /api/v1/user
+### base url - /api/v1/user
 
 `/register`
 
@@ -148,7 +148,7 @@ response body - {
  }
 ```
 
-#### base url - /api/v1/admin
+## base url - /api/v1/admin
 
 `/assignments`
 

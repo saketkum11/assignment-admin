@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+import { ApiErrorHandler } from "../utils/ApiErrorHandler.js";
+import { ApiResponseHandler } from "../utils/ApiResponseHandler.js";
 import { Assignment } from "../models/assigment.model.js";
 import z from "zod";
 const validateInputString = z.string();
@@ -6,10 +7,15 @@ const validateInputString = z.string();
 const getAssigment = async (req, res) => {
   try {
     const assignment = await Assignment.find();
-    return res.status(200).json({
-      data: assignment,
-      message: "Assignment data fetch successfully",
-    });
+    return res
+      .status(200)
+      .json(
+        ApiResponseHandler(
+          assignment,
+          "Assignment data fetch successfully",
+          200
+        )
+      );
   } catch (error) {
     return res.status(500).json({ message: error.message, status: 500 });
   }
@@ -24,14 +30,14 @@ const acceptAssignment = async (req, res) => {
     }
     const validateId = validateInputString.safeParse(id);
     if (!validateId.success) {
-      return res.status(500).json({ message: validateId.error });
+      return res.status(409).json(ApiErrorHandler(validateId.error, 409));
     }
     // find assignment
     const findAssignment = await Assignment.findById(id);
     if (findAssignment.status === "accept") {
       return res
         .status(406)
-        .json({ message: "assignment  is already accepted by admin" });
+        .json(ApiErrorHandler("assignment  is already accepted by admin", 406));
     }
 
     const assignment = await Assignment.findByIdAndUpdate(
@@ -46,9 +52,11 @@ const acceptAssignment = async (req, res) => {
       }
     );
 
-    return res.status(200).json({
-      message: "Assignment  is accepted by Admin ",
-    });
+    return res
+      .status(200)
+      .json(
+        ApiResponseHandler(assignment, "Assignment  is accepted by Admin ", 200)
+      );
   } catch (error) {
     return res.status(500).json({ message: error.message, status: 500 });
   }
@@ -60,18 +68,18 @@ const rejectAssignment = async (req, res) => {
   try {
     const { id } = req.params;
     if (!id) {
-      return res.status(403).json("invalid ID");
+      return res.status(409).json(ApiErrorHandler("invalid ID", 409));
     }
     const validateId = validateInputString.safeParse(id);
     if (!validateId.success) {
-      return res.status(500).json({ message: validateId.error });
+      return res.status(409).json(ApiErrorHandler(validateId.error, 409));
     }
     // find assignment
     const findAssignment = await Assignment.findById(id);
     if (findAssignment.status === "reject") {
       return res
         .status(406)
-        .json({ message: "assignment  is already rejected by admin" });
+        .json(ApiErrorHandler("assignment  is already  by admin", 406));
     }
     const assignment = await Assignment.findByIdAndUpdate(
       id,
@@ -84,10 +92,11 @@ const rejectAssignment = async (req, res) => {
         new: true,
       }
     );
-    return res.status(200).json({
-      data: assignment,
-      message: "Assignment data fetch successfully",
-    });
+    return res
+      .status(200)
+      .json(
+        ApiResponseHandler(assignment, "Assignment is rejected by Admin ", 200)
+      );
   } catch (error) {
     return res.status(500).json({ message: error.message, status: 500 });
   }
