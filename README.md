@@ -1,7 +1,6 @@
 ## Assignment System Backend
 
-- A Backend  app  which handle assignment assign.
-- User can upload the assignment to admin , and admin can Accept or Reject them .
+- A backend application that facilitates assignment handling between users and admins. Users can submit assignments, while admins have the authority to accept or reject them.
 
 #### ENDPOINT
 
